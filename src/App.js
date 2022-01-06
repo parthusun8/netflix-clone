@@ -1,23 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import Row from './Components/ROW/Row';
+import requests from './Components/request/request';
+import Banner from './Components/Banner/Banner';
+import Navbar from './Components/NavBar/Nav';
 
 function App() {
+
+  const fetch = [
+    "NetflixOriginals",
+    "TopRated",
+    "ActionMovies",
+    "ComedyMovies",
+    "HorrorMovies",
+    "RomanceMovies",
+    "Documentaries",
+  ];
+
+  const title = [
+    "Netflix Originals",
+    "Top Rated",
+    "Action Movies",
+    "Comedy Movies",
+    "Horror Movies",
+    "Romance Movies",
+    "Documentaries",
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <Navbar />
+      <Banner />
+      <Row 
+        title="Trending Now" 
+        fetchUrl={requests["fetchTrendingNow"]}
+        isLargeRow = {true}
+      />
+      {fetch.map((elem, i) => 
+        <Row title={title[i]} fetchUrl={requests["fetch"+elem]} key={i}/>
+      )}
     </div>
   );
 }
